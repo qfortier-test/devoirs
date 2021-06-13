@@ -31,8 +31,11 @@ jobs:
         uses: jitterbit/get-changed-files@v1
       - run: |
           for changed_file in ${{ steps.files.outputs.all }}; do
-            echo "${changed_file}.";
-            jupyter nbconvert --to script ${changed_file};
+            if [[ $changed_file == *.ipynb ]]
+            then
+              echo "${changed_file}.";
+              jupyter nbconvert --to script ${changed_file};
+            fi
           done
       - name: Commit files
         run: |
