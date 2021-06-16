@@ -34,7 +34,7 @@ jobs:
             if [[ $changed_file == *.ipynb ]]
             then
               echo "${changed_file}.";
-              jupyter nbconvert --to script ${changed_file};
+              jupyter nbconvert --to python ${changed_file};
             fi
           done
       - name: Commit files
