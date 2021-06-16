@@ -28,8 +28,6 @@ jobs:
         run: |
           pip install jupyter
           pip install --upgrade Pygments
-          pip show jupyter
-          pip show pygments
       - id: files
         uses: jitterbit/get-changed-files@v1
       - run: |
@@ -44,7 +42,8 @@ jobs:
         run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git commit -m "Add changes" -a
+          git add --all
+          git commit -m "nbconvert --to python"
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
