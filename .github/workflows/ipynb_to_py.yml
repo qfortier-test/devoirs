@@ -34,8 +34,8 @@ jobs:
           for changed_file in ${{ steps.files.outputs.all }}; do
             if [[ $changed_file == *.ipynb ]]
             then
-              echo "${changed_file}.";
-              jupyter nbconvert --to python ${changed_file};
+              echo "Convert ${changed_file} to markdown";
+              jupyter nbconvert --to markdown ${changed_file} --stdout | cat -s > ${changed_file%.*}.md;
             fi
           done
       - name: Commit files
@@ -43,7 +43,7 @@ jobs:
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add --all
-          git commit -m "nbconvert --to python"
+          git commit -m "nbconvert --to markdown"
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
