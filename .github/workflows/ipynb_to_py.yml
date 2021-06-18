@@ -44,8 +44,7 @@ jobs:
           git config --local user.name "github-actions[bot]"
           git add --all
           git commit -m "nbconvert --to markdown"
-      - name: Push changes
-        uses: ad-m/github-push-action@master
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: main
